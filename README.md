@@ -1,6 +1,6 @@
 # Crypto CLI
 
-A simple CLI app to get the latest USD prices for various cryptocurrencies (currently BTC, ETH, LTC, XRP).
+A simple CLI app to get the latest USD prices for various cryptocurrencies (currently BTC, ETH, LTC).
 
 ## Installation & Usage
 
