@@ -1,0 +1,14 @@
+#! /usr/bin/env php
+
+<?php
+
+require 'vendor/autoload.php';
+
+use Cashlion\CryptoCommand;
+use Symfony\Component\Console\Application;
+
+$app = new Application('Crypto CLI','1.0');
+
+$app->add(new CryptoCommand);
+
+$app->run();
