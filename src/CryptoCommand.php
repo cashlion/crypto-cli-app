@@ -25,7 +25,7 @@ class CryptoCommand extends Command
         $data = $this->getPrices();
 
         (new Table($output))
-            ->setHeaders(['Symbol','USD'])
+            ->setHeaders(['Symbol','USD','1HR %∆'])
             ->setRows($data)
             ->render();
     }
@@ -34,7 +34,14 @@ class CryptoCommand extends Command
     {
         return collect($this->coins)->map(function ($coin) {
             $response = Zttp::get("https://api.coinmarketcap.com/v1/ticker/{$coin}/")->json();
-            return [ $response[0]['symbol'], number_format($response[0]['price_usd'], 2)];
+            return [
+                $response[0]['symbol'],
+                number_format($response[0]['price_usd'], 2),
+                vsprintf('%s %s', [
+                    floatval($response[0]['percent_change_1h']) < 0 ? '-' : '+',
+                    preg_replace('/\-/','',$response[0]['percent_change_1h'])
+                ])
+            ];
         })->toArray();
     }
 }
