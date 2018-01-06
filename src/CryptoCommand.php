@@ -25,7 +25,7 @@ class CryptoCommand extends Command
         $data = $this->getPrices();
 
         (new Table($output))
-            ->setHeaders(['Symbol','USD','1HR %∆'])
+            ->setHeaders(['Symbol','USD','1HR %∆','1D %∆','1W %∆'])
             ->setRows($data)
             ->render();
     }
@@ -39,8 +39,16 @@ class CryptoCommand extends Command
                 number_format($response[0]['price_usd'], 2),
                 vsprintf('%s %s', [
                     floatval($response[0]['percent_change_1h']) < 0 ? '-' : '+',
-                    preg_replace('/\-/','',$response[0]['percent_change_1h'])
-                ])
+                    preg_replace('/\-/', '', $response[0]['percent_change_1h'])
+                ]),
+                vsprintf('%s %s', [
+                    floatval($response[0]['percent_change_24h']) < 0 ? '-' : '+',
+                    preg_replace('/\-/', '', $response[0]['percent_change_24h'])
+                ]),
+                vsprintf('%s %s', [
+                    floatval($response[0]['percent_change_7d']) < 0 ? '-' : '+',
+                    preg_replace('/\-/', '', $response[0]['percent_change_7d'])
+                ]),
             ];
         })->toArray();
     }
