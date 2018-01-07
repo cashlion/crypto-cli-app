@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CryptoCommand extends Command
 {
     public $coins = [
-        'ethereum', 'ark', 'quantstamp'
+        'ethereum', 'ark', 'quantstamp', '0x'
     ];
 
     public function configure()
